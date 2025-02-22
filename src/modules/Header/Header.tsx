@@ -1,25 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import Button from "../../shared/components/Button";
 
-import { clearUser } from "../AuthForm/store/userSlice";
-
-import { RootState } from "../../store";
+import { useHeader } from "./hooks/useHeader";
 
 const Header = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const user = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(clearUser());
-    navigate("/");
-  };
-
-  const userIcon = user?.data?.avatar_url ?? "./user_icon.svg";
-  const userName = user?.data?.name ?? user?.data?.login;
+  const {
+    isDropdownOpen,
+    setIsDropdownOpen,
+    user,
+    handleLogout,
+    userIcon,
+    userName,
+  } = useHeader();
 
   return (
     <header className="h-20 rounded-b-2xl bg-gray-100 px-12 py-4 shadow">
@@ -39,13 +30,15 @@ const Header = () => {
               className="h-12 rounded-full"
             />
             {isDropdownOpen && (
-              <div className="absolute top-12 left-0 w-48 rounded-md bg-white text-gray-700 shadow-lg hover:bg-gray-100 hover:text-blue-600">
-                <button
-                  className="block w-full cursor-pointer px-4 py-2 text-left text-sm"
+              <div className="absolute top-12 left-0 w-48 rounded-md bg-white shadow-lg">
+                <Button
+                  variant="ghost"
+                  fullWidth
+                  className="justify-start"
                   onClick={() => handleLogout()}
                 >
-                  Выйти
-                </button>
+                  Logout
+                </Button>
               </div>
             )}
           </div>
