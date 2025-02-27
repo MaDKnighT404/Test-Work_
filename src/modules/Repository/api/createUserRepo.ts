@@ -11,7 +11,7 @@ export const createUserRepo = async (
   await octokit.request("POST /user/repos", {
     name: data.name,
     description: data.description,
-    visibility: data.visibility,
+    private: data.visibility === "private",
     headers: {
       "X-GitHub-Api-Version": "2022-11-28",
     },
