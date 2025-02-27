@@ -1,4 +1,4 @@
-import { Octokit } from "octokit";
+import { getOctokit } from "../../../shared/api/getOctokit";
 
 import type { Repository } from "../types";
 
@@ -6,9 +6,7 @@ export const createUserRepo = async (
   token: string,
   data: Omit<Repository, "id">,
 ) => {
-  const octokit = new Octokit({
-    auth: token,
-  });
+  const octokit = getOctokit(token);
 
   await octokit.request("POST /user/repos", {
     name: data.name,

@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { getUserInfo } from "../api/getUserInfo";
+
 import { setUser, setToken } from "../store/userSlice";
 
+import type { RootState } from "../../../store";
+
 export const useAuthForm = () => {
-  const [githubToken, setGithubToken] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const githubToken = useSelector((state: RootState) => state.user.token);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,10 +34,8 @@ export const useAuthForm = () => {
   };
 
   return {
-    githubToken,
     errorMessage,
     isLoading,
-    setGithubToken,
     handleSubmit,
   };
 };

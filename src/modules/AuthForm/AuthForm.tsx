@@ -1,14 +1,21 @@
+import { useSelector, useDispatch } from "react-redux";
+
 import InputField from "../../shared/components/InputField";
 import Button from "../../shared/components/Button";
 import Loader from "../../shared/components/Loader";
 
 import { useAuthForm } from "./hooks/useAuthForm";
 
-import { GITGUB_HELP_URL } from "../../conts";
+import { RootState } from "../../store";
+import { setToken } from "./store/userSlice";
+
+import { GITHUB_HELP_URL } from "../../conts";
 
 const AuthForm = () => {
-  const { githubToken, errorMessage, isLoading, setGithubToken, handleSubmit } =
-    useAuthForm();
+  const githubToken = useSelector((state: RootState) => state.user.token);
+  const dispatch = useDispatch();
+
+  const { errorMessage, isLoading, handleSubmit } = useAuthForm();
 
   return (
     <form
@@ -28,7 +35,7 @@ const AuthForm = () => {
         placeholder="github_pat_11AWI******"
         type="text"
         value={githubToken}
-        onChange={(e) => setGithubToken(e.target.value)}
+        onChange={(e) => dispatch(setToken(e.target.value))}
       />
 
       <Button type="submit" variant="primary" className="mt-2">
@@ -37,7 +44,7 @@ const AuthForm = () => {
 
       <p className="mt-2 text-center text-sm text-gray-500">
         You can know how to generate a github API token{" "}
-        <a href={GITGUB_HELP_URL} target="_blank" className="text-blue-600">
+        <a href={GITHUB_HELP_URL} target="_blank" className="text-blue-600">
           here
         </a>
         .

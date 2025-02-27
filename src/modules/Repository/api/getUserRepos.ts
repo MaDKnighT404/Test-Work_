@@ -1,4 +1,5 @@
-import { Octokit } from "octokit";
+import { getOctokit } from "../../../shared/api/getOctokit";
+
 import type { Repository } from "../types";
 
 interface ReposResponse {
@@ -10,9 +11,7 @@ export const getUserRepos = async (
   token: string,
   page: number = 1,
 ): Promise<ReposResponse> => {
-  const octokit = new Octokit({
-    auth: token,
-  });
+  const octokit = getOctokit(token);
 
   const timestamp = Date.now().toString();
 

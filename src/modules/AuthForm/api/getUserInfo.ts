@@ -1,9 +1,7 @@
-import { Octokit } from "octokit";
+import { getOctokit } from "../../../shared/api/getOctokit";
 
 export const getUserInfo = async (token: string) => {
-  const octokit = new Octokit({
-    auth: token,
-  });
+  const octokit = getOctokit(token);
 
   const response = await octokit.request("GET /user", {
     headers: {

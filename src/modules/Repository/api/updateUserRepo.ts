@@ -1,4 +1,4 @@
-import { Octokit } from "octokit";
+import { getOctokit } from "../../../shared/api/getOctokit";
 
 import type { Repository } from "../types";
 
@@ -7,9 +7,7 @@ export const updateUserRepo = async (
   data: Omit<Repository, "id">,
   username: string,
 ) => {
-  const octokit = new Octokit({
-    auth: token,
-  });
+  const octokit = getOctokit(token);
 
   await octokit.request(`PATCH /repos/${username}/${data.name}`, {
     name: data.name,

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
 import { motion, HTMLMotionProps } from "framer-motion";
+import { cn } from "../utils/cn";
 
 interface ButtonProps extends HTMLMotionProps<"button"> {
   variant?: "primary" | "secondary" | "danger" | "ghost" | "icon";
@@ -41,7 +41,7 @@ const Button = ({
   return (
     <motion.button
       whileTap={{ scale: 0.95 }}
-      className={twMerge(
+      className={cn(
         baseStyles,
         variant !== "icon" ? sizeStyles[size] : "",
         variantStyles[variant],

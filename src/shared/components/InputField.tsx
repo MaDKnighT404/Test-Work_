@@ -1,5 +1,5 @@
 import React from "react";
-import { twMerge } from "tailwind-merge";
+import { cn } from "../utils/cn";
 
 interface InputFieldProps {
   id: string;
@@ -46,7 +46,7 @@ const InputField: React.FC<InputFieldProps> = ({
             id={id}
             value={value}
             onChange={onChange}
-            className={twMerge(baseStyles, typeStyles.text, className)}
+            className={cn(baseStyles, typeStyles.text, className)}
             placeholder={placeholder || label}
           />
         );
@@ -57,7 +57,7 @@ const InputField: React.FC<InputFieldProps> = ({
             value={value}
             onChange={onChange}
             rows={3}
-            className={twMerge(baseStyles, typeStyles.textarea, className)}
+            className={cn(baseStyles, typeStyles.textarea, className)}
             placeholder={label}
           />
         );
@@ -67,7 +67,7 @@ const InputField: React.FC<InputFieldProps> = ({
             id={id}
             value={value}
             onChange={onChange}
-            className={twMerge(baseStyles, typeStyles.select, className)}
+            className={cn(baseStyles, typeStyles.select, className)}
           >
             {options?.map((option) => (
               <option key={option.value} value={option.value}>
